@@ -11,6 +11,15 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
+                <div class="bg-indigo-50 p-6 border-b border-indigo-400 ">
+                  User 
+                  @can('edit-product')
+                  can
+                  @else
+                  can't
+                  @endif
+                  edit-product
+                </div>
             </div>
         </div>
     </div>
