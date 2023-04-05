@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Permission;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Tests\TestCase;
 
@@ -58,5 +60,14 @@ class PermissionUserTest extends TestCase
     $this->actingAs($user2)
       ->delete(route('products.destroy', $product))
       ->assertForbidden();
+  }
+
+  /** @test */
+  public function the_list_of_permissions_should_be_cached()
+  {
+    	Permission::query()->create(['permission' => 'edit-product']);
+
+      $fromCache = Cache::get('permissions');
+      $this->assertCount(1, $fromCache);
   }
 }
