@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="favicon.svg" type="favicon.svg">
+        <link rel="shortcut icon" href="favicon.ico" type="favicon.ico">
 
         <title>Estoque</title>
 
@@ -11,9 +11,9 @@
     </head>
     <body class="bg-gray-900">
         <header>
-          @include('./navbar')
+          @include('layouts.navigationbar')
         </header>
-        @include('./sidebar')
+        @include('layouts.sidebar')
         
         <main class="ml-[130px]">
             @yield('content')

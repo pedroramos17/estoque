@@ -21,7 +21,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::delete('products/{product}', [ProductController::class, 'destroy'])->middleware(['auth'])->name('products.destroy');
+Route::middleware(['auth', 'verified'])->group(function () {
+  Route::get('produtos', [ProductController::class, 'index'])->name('product.getAll');
+  Route::get('produtos/criar', [ProductController::class, 'create'])->name('product.create');
+  Route::post('produtos', [ProductController::class, 'store'])->name('product.store');
+  Route::get('produtos/{product}', [ProductController::class, 'show'])->name('product.show');
+  Route::patch('produtos/{product}', [ProductController::class, 'update'])->name('product.update');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

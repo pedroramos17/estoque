@@ -17,10 +17,20 @@ class Permission extends Model
 
     public static function getPermission(string $permission): Permission
     {
-      $p = self::getAllFromCache()->where('permission', $permission)->toArray();
+      $p = self::getAllFromCache()->where('permission', $permission);
 
-      if (!$p){
+      if (!$p) {
         $p = Permission::query()->create(['permission' => $permission]);
+      }
+
+      return $p;
+    }
+    public static function removePermission(string $permission): Permission
+    {
+      $p = self::getAllFromCache()->where('permission', $permission);
+
+      if (!$p) {
+        $p = Permission::query()->deleteWhere(['permission' => $permission]);
       }
 
       return $p;

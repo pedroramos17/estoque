@@ -62,14 +62,14 @@ class User extends Authenticatable
     {
       $p = Permission::getPermission($permission);
 
-      $this->permissions()->syncWithoutDetaching($p);
+      $this->permissions()->attach($p);
 
       Cache::forget('permissions::of::user::'.$this->id);
     }
 
     public function removePermissionTo(string $permission): void
     {
-      $p = Permission::getPermission($permission);
+      $p = Permission::removePermission($permission);
 
       $this->permissions()->detach($p);
 

@@ -1,3 +1,119 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .title-card-parent {
+        @apply flex justify-between mx-4 mt-4;
+    }
+    .header {
+        @apply ml-[130px] font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight;
+    }
+    .navbar {
+        @apply fixed top-0 left-0 right-0 z-10 flex flex-row items-center justify-end gap-x-5 bg-header h-[50px] pr-[14px];
+    }
+    .menuButton {
+        @apply text-white text-xl font-bold absolute left-4 cursor-pointer;
+    }
+    .searchbar {
+        @apply w-[660px] textfield placeholder:text-textFieldPlaceholder;
+    }
+    .textfield {
+        @apply h-[28px] bg-transparent border-b border-b-white border-x-transparent border-t-transparent text-white outline-none rounded-sm;
+    }
+    .disabledField {
+        @apply border-b-textFieldDisabled border-x-transparent border-t-transparent placeholder:text-textFieldDisabled text-textFieldDisabled border-dashed;
+    }
+    .card {
+        @apply grid pb-4 px-5 pt-3 space-y-6 rounded-xl;
+    }
+    .titleCard {
+        @apply text-white text-lg font-medium;
+    }
+
+    ::-webkit-scrollbar {
+        width: 18px;
+        background: #1f3137;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #1f2937;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #1a222e;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #35465e;
+    }
+}
+
+@layer base {
+    /* Layout cards */
+
+    .cardsBox .card {
+        margin-bottom: 18px;
+    }
+
+    /* Auto fill chrome/safari */
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-text-fill-color: white;
+        -webkit-box-shadow: 0 0 0px 1000px #0369a1 inset;
+    }
+
+    /* Transition of placeholder to label */
+
+    .inputBox {
+        position: relative;
+        @apply h-[28px];
+    }
+
+    .inputBox input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .inputBox label {
+        @apply text-white;
+        position: absolute;
+        transition: 0.2s;
+        pointer-events: none;
+    }
+
+    .inputBox input:focus ~ label,
+    .inputBox input:not(:placeholder-shown) ~ label {
+        transform: translateY(-18px);
+        font-size: 12px;
+    }
+
+    /* Buttons check in & out  */
+
+    .check input[type="radio"] {
+        display: none;
+    }
+
+    .check span {
+        @apply inline-block w-48 h-10 bg-buttonCheck text-white rounded-sm text-center align-middle pt-2;
+    }
+
+    .check input[type="radio"]:checked + span {
+        @apply bg-buttonChecked text-textButtonChecked;
+    }
+
+    .check input[type="radio"]:hover:not(:checked) + span {
+        cursor: pointer;
+    }
+}
